@@ -7,6 +7,7 @@ import ru.mephi.gpus_api.entity.Client;
 import ru.mephi.gpus_api.entity.ProductLink;
 import ru.mephi.gpus_api.entity.dto.ClientDTO;
 import ru.mephi.gpus_api.repository.ClientRepository;
+import ru.mephi.gpus_api.validation.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,7 @@ public class ClientService {
 
     @Transactional
     public String createOrUpdateClient(ClientDTO clientDTO) {
+        Validator.validate(clientDTO);
         String productId = clientDTO.getProductId();
         String email = clientDTO.getEmail();
         Client client = clientRepository.findClientByEmail(email).orElse(createClient(email, new ArrayList<>()));
