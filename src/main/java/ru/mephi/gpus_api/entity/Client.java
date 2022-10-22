@@ -29,8 +29,8 @@ public class Client {
         return this;
     }
 
-    public Client setProductIds(List<ProductLink> product_ids) {
-        this.productIds = product_ids;
+    public Client setProductIds(List<ProductLink> productIds) {
+        this.productIds = productIds;
         return this;
     }
 }
