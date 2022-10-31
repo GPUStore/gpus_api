@@ -3,10 +3,10 @@ package ru.mephi.gpus_api.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.mephi.gpus_api.entity.Client;
-import ru.mephi.gpus_api.entity.ProductLink;
-import ru.mephi.gpus_api.entity.dto.ClientDTO;
-import ru.mephi.gpus_api.repository.ClientRepository;
+import ru.mephi.gpus_api.entity.clients.Client;
+import ru.mephi.gpus_api.entity.clients.ProductLink;
+import ru.mephi.gpus_api.entity.clients.dto.ClientDTO;
+import ru.mephi.gpus_api.repository.clients.ClientRepository;
 import ru.mephi.gpus_api.validation.Validator;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package ru.mephi.gpus_api.entity;
+package ru.mephi.gpus_api.entity.clients;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

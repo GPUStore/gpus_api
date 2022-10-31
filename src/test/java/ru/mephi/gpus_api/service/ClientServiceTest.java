@@ -2,10 +2,9 @@ package ru.mephi.gpus_api.service;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import ru.mephi.gpus_api.AbstractAppTest;
 import ru.mephi.gpus_api.ClientUtils;
-import ru.mephi.gpus_api.entity.dto.ClientDTO;
+import ru.mephi.gpus_api.entity.clients.dto.ClientDTO;
 
 import static org.junit.jupiter.api.Assertions.*;
 

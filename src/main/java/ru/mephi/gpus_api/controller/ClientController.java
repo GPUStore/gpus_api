@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.mephi.gpus_api.entity.dto.ClientDTO;
+import ru.mephi.gpus_api.entity.clients.dto.ClientDTO;
 import ru.mephi.gpus_api.service.ClientService;
 
 @RestController

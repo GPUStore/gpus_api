@@ -1,4 +1,4 @@
-package ru.mephi.gpus_api.entity.dto;
+package ru.mephi.gpus_api.entity.clients.dto;
 
 import lombok.Data;
 

@@ -1,6 +1,6 @@
 package ru.mephi.gpus_api;
 
-import ru.mephi.gpus_api.entity.dto.ClientDTO;
+import ru.mephi.gpus_api.entity.clients.dto.ClientDTO;
 
 public class ClientUtils {
 

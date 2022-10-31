@@ -10,12 +10,12 @@ spring:
     hibernate:
       ddl-auto: create-drop
   datasource:
-    url: jdbc:postgresql://localhost:5432/client_db
+    jdbcUrl: jdbc:postgresql://localhost:5432/client_db
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
-#  second-datasource:
-#    url: postgresql://localhost:5432/gpus_db
-#    username: postgres
-#    password: postgres
-#    driverClassName: org.postgresql.Driver
+  second-datasource:
+    jdbcUrl: jdbc:postgresql://localhost:5432/gpus_db
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
