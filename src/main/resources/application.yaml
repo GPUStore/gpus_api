@@ -14,8 +14,3 @@ spring:
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
-#  second-datasource:
-#    url: postgresql://localhost:5432/gpus_db
-#    username: postgres
-#    password: postgres
-#    driverClassName: org.postgresql.Driver
