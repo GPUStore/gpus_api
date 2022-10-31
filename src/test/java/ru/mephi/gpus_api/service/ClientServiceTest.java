@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ru.mephi.gpus_api.AbstractAppTest;
 import ru.mephi.gpus_api.ClientUtils;
 import ru.mephi.gpus_api.entity.clients.dto.ClientDTO;
+import ru.mephi.gpus_api.exception.MissingPropertyException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,11 +15,20 @@ class ClientServiceTest extends AbstractAppTest {
     private ClientService clientService;
 
     @Test
-    void createOrUpdateClientTestWithCorrectClientDto() {
+    void createOrUpdateClientTestWithCorrectClientDto1Test() {
         ClientDTO clientDto = ClientUtils.createClientDto();
 
         String clientId = clientService.createOrUpdateClient(clientDto);
 
         assertEquals(32, clientId.length());
+    }
+
+    @Test
+    void createOrUpdateClientTestWithIncorrectClientDtoTest() {
+        ClientDTO clientDto = ClientUtils.createClientDto()
+                .setNickname(null)
+                .setEmail("");
+
+        assertThrows(MissingPropertyException.class, () -> clientService.createOrUpdateClient(clientDto));
     }
 }

@@ -17,33 +17,69 @@ class ValidatorTest {
     }
 
     @Test
-    void validateWithNullProductIdTest() {
-        ClientDTO dto = ClientUtils.createClientDto();
-        dto.setProductId(null);
+    void validateCorrectDtoWithEmailTest() {
+        ClientDTO dto = ClientUtils.createClientDto()
+                .setNickname(null);
 
-        assertThrows(MissingPropertyException.class, () -> Validator.validate(dto));
+        assertDoesNotThrow(() -> Validator.validate(dto));
     }
 
     @Test
-    void validateWithNullEmailTest() {
-        ClientDTO dto = ClientUtils.createClientDto();
-        dto.setEmail(null);
+    void validateCorrectDtoWithNickTest() {
+        ClientDTO dto = ClientUtils.createClientDto()
+                .setEmail(null);
+
+        assertDoesNotThrow(() -> Validator.validate(dto));
+    }
+
+    @Test
+    void validateWithNullProductIdTest() {
+        ClientDTO dto = ClientUtils.createClientDto()
+                .setProductId(null);
 
         assertThrows(MissingPropertyException.class, () -> Validator.validate(dto));
     }
 
     @Test
     void validateWithEmptyProductIdTest() {
-        ClientDTO dto = ClientUtils.createClientDto();
-        dto.setProductId("");
+        ClientDTO dto = ClientUtils.createClientDto()
+                .setProductId("");
 
         assertThrows(MissingPropertyException.class, () -> Validator.validate(dto));
     }
 
     @Test
-    void validateWithEmptyEmailTest() {
-        ClientDTO dto = ClientUtils.createClientDto();
-        dto.setEmail("");
+    void validateWithNullEmailAndNickTest() {
+        ClientDTO dto = ClientUtils.createClientDto()
+                .setEmail(null)
+                .setNickname(null);
+
+        assertThrows(MissingPropertyException.class, () -> Validator.validate(dto));
+    }
+
+    @Test
+    void validateWithEmptyEmailAndNickTest() {
+        ClientDTO dto = ClientUtils.createClientDto()
+                .setEmail("")
+                .setNickname("");
+
+        assertThrows(MissingPropertyException.class, () -> Validator.validate(dto));
+    }
+
+    @Test
+    void validateWithNullEmailAndEmptyNickTest() {
+        ClientDTO dto = ClientUtils.createClientDto()
+                .setEmail(null)
+                .setNickname("");
+
+        assertThrows(MissingPropertyException.class, () -> Validator.validate(dto));
+    }
+
+    @Test
+    void validateWithEmptyEmailAndNullNickTest() {
+        ClientDTO dto = ClientUtils.createClientDto()
+                .setEmail("")
+                .setNickname(null);
 
         assertThrows(MissingPropertyException.class, () -> Validator.validate(dto));
     }

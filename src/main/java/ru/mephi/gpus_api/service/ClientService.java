@@ -22,15 +22,18 @@ public class ClientService {
         Validator.validate(clientDTO);
         String productId = clientDTO.getProductId();
         String email = clientDTO.getEmail();
-        Client client = clientRepository.findClientByEmail(email).orElse(createClient(email, new ArrayList<>()));
+        String nickname = clientDTO.getNickname();
+        Client client = clientRepository.findClientByEmailOrNickname(email, nickname)
+                .orElse(createClient(email, nickname, new ArrayList<>()));
         ProductLink productLink = createProductLink(productId, client);
         addIfNotContains(client, productLink);
         return clientRepository.save(client).getId();
     }
 
-    private Client createClient(String email, List<ProductLink> productLinks) {
+    private Client createClient(String email, String nickname, List<ProductLink> productLinks) {
         return new Client()
                 .setEmail(email)
+                .setNickname(nickname)
                 .setProductIds(productLinks);
     }
 

@@ -6,7 +6,8 @@ public class ClientUtils {
 
     public static ClientDTO createClientDto(){
         return new ClientDTO()
-                .setEmail("teste@mail.ru")
+                .setEmail("test@mail.ru")
+                .setNickname("test-nick")
                 .setProductId("1");
     }
 

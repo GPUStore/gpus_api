@@ -18,14 +18,22 @@ public class Client {
     @Column(name = "client_id", length = 32)
     private String id;
 
-    @JoinColumn(name = "product_id", nullable = false)
+    @JoinColumn(name = "email", nullable = false)
     private String email;
+
+    @JoinColumn(name = "nickname", nullable = false)
+    private String nickname;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
     private List<ProductLink> productIds;
 
     public Client setEmail(String email) {
         this.email = email;
+        return this;
+    }
+
+    public Client setNickname(String nickname) {
+        this.nickname = nickname;
         return this;
     }
 
