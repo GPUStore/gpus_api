@@ -19,6 +19,7 @@
         <springdoc-openapi-ui.version>1.6.11</springdoc-openapi-ui.version>
         <jackson-annotations.version>2.13.3</jackson-annotations.version>
         <spring-boot-starter-web.version>2.7.0</spring-boot-starter-web.version>
+        <mapstruct.version>1.5.1.Final</mapstruct.version>
     </properties>
 
     <dependencies>
@@ -73,6 +74,16 @@
             <version>${jackson-annotations.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
 
     </dependencies>
 

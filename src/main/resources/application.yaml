@@ -7,8 +7,6 @@ spring:
   jpa:
     database:
     show-sql: true
-    hibernate:
-      ddl-auto: create-drop
   datasource:
     jdbcUrl: jdbc:postgresql://localhost:5432/client_db
     username: postgres

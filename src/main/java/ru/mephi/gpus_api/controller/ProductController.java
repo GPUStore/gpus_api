@@ -1,11 +1,10 @@
 package ru.mephi.gpus_api.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.mephi.gpus_api.entity.products.Product;
+import ru.mephi.gpus_api.entity.products.dto.StoreRqDto;
+import ru.mephi.gpus_api.entity.products.dto.StoreRsDto;
 import ru.mephi.gpus_api.service.ProductService;
 
 import java.util.List;
@@ -26,4 +25,20 @@ public class ProductController {
     public Product getById(@PathVariable String id){
         return productService.getById(id);
     }
+
+    @GetMapping("/{id}/stores")
+    public List<StoreRsDto> getStoresById(@PathVariable String id){
+        return productService.getStoresById(id);
+    }
+
+    @PostMapping("/{id}/stores/add")
+    public void addStoreToProduct(@PathVariable String id, @RequestBody StoreRqDto dto){
+        productService.addStoreToProduct(id, dto);
+    }
+
+    @PostMapping("/{id}/stores/delete")
+    public void deleteStoreFromProduct(@PathVariable String id, @RequestBody String url){
+        productService.deleteStoreFromProduct(id, url);
+    }
+
 }

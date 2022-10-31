@@ -13,7 +13,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 import ru.mephi.gpus_api.entity.clients.Client;
 
 import javax.sql.DataSource;
-import java.util.Properties;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableJpaRepositories(
@@ -23,12 +24,13 @@ import java.util.Properties;
 )
 public class ClientDatabaseConfig {
 
+    private static final String PREFIX_TO_PROPERTIES = "spring.datasource";
     public static final String REPOSITORY_PACKAGE = "ru.mephi.gpus_api.repository.clients";
     private static final String ENTITY_PACKAGE = Client.class.getPackageName();
 
     @Primary
     @Bean
-    @ConfigurationProperties("spring.datasource")
+    @ConfigurationProperties(PREFIX_TO_PROPERTIES)
     public DataSource clientDataSource() {
         return DataSourceBuilder.create().build();
     }
@@ -40,8 +42,14 @@ public class ClientDatabaseConfig {
         em.setDataSource(clientDataSource());
         em.setPackagesToScan(ENTITY_PACKAGE);
         em.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        em.setJpaProperties(new Properties());
+        em.setJpaPropertyMap(createProperties());
         return em;
+    }
+
+    private Map<String, String> createProperties() {
+        HashMap<String, String> properties = new HashMap<>();
+        properties.put("hibernate.hbm2ddl.auto", "update");
+        return properties;
     }
 
     @Primary

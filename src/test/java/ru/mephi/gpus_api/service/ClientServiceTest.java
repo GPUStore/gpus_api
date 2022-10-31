@@ -15,7 +15,7 @@ class ClientServiceTest extends AbstractAppTest {
     private ClientService clientService;
 
     @Test
-    void createOrUpdateClientTestWithCorrectClientDto1Test() {
+    void createOrUpdateClientTestWithCorrectClientDtoTest() {
         ClientDTO clientDto = ClientUtils.createClientDto();
 
         String clientId = clientService.createOrUpdateClient(clientDto);
