@@ -1,5 +1,6 @@
 package ru.mephi.gpus_api.entity.products;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
@@ -21,6 +22,7 @@ public class Product {
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Store> stores;
     @Column(name = "country")
     private String country;
@@ -29,6 +31,7 @@ public class Product {
     @Column(name = "weight_with_box")
     private double weightWithBox;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Parameter> parameters;
     @Enumerated(EnumType.STRING)
     private Type type;
@@ -46,6 +49,7 @@ public class Product {
                     name = "product_id", referencedColumnName = "product_id")
 
     )
+    @JsonIgnore
     private Set<Category> categories;
 
     public Product setStores(List<Store> store) {

@@ -1,7 +1,6 @@
 package ru.mephi.gpus_api.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mephi.gpus_api.entity.products.Product;
@@ -12,6 +11,7 @@ import ru.mephi.gpus_api.exception.ProductWithIdNotFoundException;
 import ru.mephi.gpus_api.exception.StoreExistsException;
 import ru.mephi.gpus_api.mapper.StoreMapper;
 import ru.mephi.gpus_api.repository.products.ProductsRepository;
+import ru.mephi.gpus_api.repository.products.StoreRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,19 +20,21 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductsRepository productsRepository;
+    private final StoreRepository storeRepository;
     private final StoreMapper storeMapper;
 
     public List<Product> getAll() {
         return productsRepository.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Product getById(String id) {
         return productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
     }
 
+
     public List<StoreRsDto> getStoresById(String id) {
-        Product product = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
-        return product.getStores().stream()
+        return storeRepository.findAllByProductId(id).stream()
                 .map(storeMapper::entityToDto)
                 .collect(Collectors.toList());
     }
@@ -54,11 +56,7 @@ public class ProductService {
     @Transactional
     public void deleteStoreFromProduct(String id, String url) {
         Product product = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
-        for (Store store : product.getStores()) {
-            if (store.getUrl().equals(url)) {
-                product.getStores().remove(store);
-            }
-        }
+        product.getStores().removeIf(store -> store.getUrl().equals(url));
         productsRepository.save(product);
     }
 }
