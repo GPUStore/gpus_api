@@ -27,11 +27,9 @@ public class ProductService {
         return productsRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     public Product getById(String id) {
         return productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
     }
-
 
     public List<StoreRsDto> getStoresById(String id) {
         return storeRepository.findAllByProductId(id).stream()
