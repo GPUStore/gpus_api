@@ -24,6 +24,19 @@ class ClientServiceTest extends AbstractAppTest {
     }
 
     @Test
+    void createOrUpdateClientTestWithCorrectClientDtoOtherLinkTest() {
+        ClientDTO clientDto1 = ClientUtils.createClientDto()
+                .setProductId("1");
+        ClientDTO clientDto2 = ClientUtils.createClientDto()
+                .setProductId("2");
+        clientService.createOrUpdateClient(clientDto1);
+
+        String clientId = clientService.createOrUpdateClient(clientDto2);
+
+        assertEquals(32, clientId.length());
+    }
+
+    @Test
     void createOrUpdateClientTestWithIncorrectClientDtoTest() {
         ClientDTO clientDto = ClientUtils.createClientDto()
                 .setNickname(null)

@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mephi.gpus_api.entity.clients.Client;
+import ru.mephi.gpus_api.entity.clients.ClientUnsubDto;
 import ru.mephi.gpus_api.entity.clients.ProductLink;
 import ru.mephi.gpus_api.entity.clients.dto.ClientDTO;
+import ru.mephi.gpus_api.exception.ClientWithEmailNotFoundException;
 import ru.mephi.gpus_api.repository.clients.ClientRepository;
 import ru.mephi.gpus_api.validation.Validator;
 
@@ -16,6 +18,34 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientService {
     private final ClientRepository clientRepository;
+
+    public boolean unsubscribe(ClientUnsubDto dto) {
+        String email = dto.getEmail();
+        String productId = dto.getProductId();
+        if (productId == null) {
+            return unsubscribeAll(email);
+        } else {
+            return unsubscribe(email, productId);
+        }
+    }
+
+    @Transactional
+    public Boolean unsubscribeAll(String email) {
+        return clientRepository.deleteClientByEmail(email) == 1;
+    }
+
+    @Transactional //TODO удалить связь
+    public boolean unsubscribe(String email, String productId) {
+        Client client = clientRepository.findClientByEmailOrNickname(email, "")
+                .orElseThrow(() -> new ClientWithEmailNotFoundException(email));
+        for (ProductLink link : client.getProductIds()) {
+            if (link.getProductId().equals(productId)) {
+                client.getProductIds().remove(link);
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Transactional
     public String createOrUpdateClient(ClientDTO clientDTO) {
@@ -48,5 +78,4 @@ public class ClientService {
             client.getProductIds().add(productLink);
         }
     }
-
 }

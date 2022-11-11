@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @EqualsAndHashCode
@@ -31,9 +32,29 @@ public class Product {
     private List<Parameter> parameters;
     @Enumerated(EnumType.STRING)
     private Type type;
+    @ManyToMany(cascade =
+            {
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+                    CascadeType.PERSIST
+            })
+    @JoinTable(
+            name = "products_categories",
+            inverseJoinColumns = @JoinColumn(
+                    name = "category_id", referencedColumnName = "category_id"),
+            joinColumns = @JoinColumn(
+                    name = "product_id", referencedColumnName = "product_id")
+
+    )
+    private Set<Category> categories;
 
     public Product setStores(List<Store> store) {
         this.stores = store;
+        return this;
+    }
+
+    public Product setCategories(Set<Category> categorySet){
+        this.categories = categorySet;
         return this;
     }
 

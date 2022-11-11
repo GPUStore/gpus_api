@@ -1,7 +1,9 @@
 package ru.mephi.gpus_api.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.mephi.gpus_api.entity.products.Product;
 import ru.mephi.gpus_api.entity.products.Store;
 import ru.mephi.gpus_api.entity.products.dto.StoreRqDto;
@@ -35,6 +37,7 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public void addStoreToProduct(String id, StoreRqDto dto) {
         Product product = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
         Store newStore = storeMapper.dtoToEntity(dto);
@@ -48,6 +51,7 @@ public class ProductService {
         productsRepository.save(product);
     }
 
+    @Transactional
     public void deleteStoreFromProduct(String id, String url) {
         Product product = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
         for (Store store : product.getStores()) {
