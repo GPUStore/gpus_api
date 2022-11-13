@@ -5,16 +5,10 @@ import lombok.Data;
 @Data
 public class ClientDTO {
     String email;
-    String nickname;
     String productId;
 
     public ClientDTO setEmail(String email) {
         this.email = email;
-        return this;
-    }
-
-    public ClientDTO setNickname(String nickname) {
-        this.nickname = nickname;
         return this;
     }
 

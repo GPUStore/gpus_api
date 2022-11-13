@@ -24,16 +24,11 @@ public class Client {
     @JoinColumn(name = "nickname", nullable = false)
     private String nickname;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<ProductLink> productIds;
 
     public Client setEmail(String email) {
         this.email = email;
-        return this;
-    }
-
-    public Client setNickname(String nickname) {
-        this.nickname = nickname;
         return this;
     }
 
