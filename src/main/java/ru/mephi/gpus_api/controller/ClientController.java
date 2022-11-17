@@ -9,6 +9,7 @@ import ru.mephi.gpus_api.service.ClientService;
 @RequestMapping("/clients")
 @RequiredArgsConstructor
 public class ClientController {
+
     private final ClientService clientService;
 
     @PostMapping("/unsubscribe")

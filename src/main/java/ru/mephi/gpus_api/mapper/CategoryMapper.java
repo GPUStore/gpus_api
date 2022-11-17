@@ -6,5 +6,6 @@ import ru.mephi.gpus_api.entity.products.dto.category.CategoryRsDto;
 
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
+
     CategoryRsDto entityToDto(Category entity);
 }

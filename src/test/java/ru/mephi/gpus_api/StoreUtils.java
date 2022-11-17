@@ -4,6 +4,7 @@ import ru.mephi.gpus_api.entity.products.Store;
 import ru.mephi.gpus_api.entity.products.dto.store.StoreRqDto;
 
 public class StoreUtils {
+
     public static Store createCorrectStore() {
         return new Store()
                 .setProduct(null)

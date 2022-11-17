@@ -1,16 +1,17 @@
 package ru.mephi.gpus_api.entity.products;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
-@EqualsAndHashCode
+@Getter
+@Setter
 @Entity
 @Table(name = "characteristic")
 public class Characteristic {
+
     @Id
     @Column(name = "characteristic_id")
     private String name;

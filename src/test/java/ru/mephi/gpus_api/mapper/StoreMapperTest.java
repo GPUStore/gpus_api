@@ -11,6 +11,7 @@ import static ru.mephi.gpus_api.StoreUtils.createCorrectStore;
 import static ru.mephi.gpus_api.StoreUtils.createCorrectStoreDto;
 
 class StoreMapperTest extends AbstractAppTest {
+
     @Test
     void entityToDtoTest() {
         Store entity = createCorrectStore();

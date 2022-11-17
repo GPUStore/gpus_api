@@ -17,9 +17,12 @@ import ru.mephi.gpus_api.repository.products.ProductsRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static ru.mephi.gpus_api.validation.Validator.validate;
+
 @Service
 @RequiredArgsConstructor
 public class ProductService {
+
     private final ProductsRepository productsRepository;
     private final StoreMapper storeMapper;
     private final ProductMapper productMapper;
@@ -44,6 +47,7 @@ public class ProductService {
 
     @Transactional
     public void addStoreToProduct(String id, StoreRqDto dto) {
+        validate(dto);
         Product product = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
         Store newStore = storeMapper.dtoToEntity(dto);
         newStore.setProduct(product);

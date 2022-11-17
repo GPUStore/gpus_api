@@ -8,11 +8,11 @@ import ru.mephi.gpus_api.entity.products.dto.parameter.ParameterRsDto;
 import ru.mephi.gpus_api.entity.products.dto.store.StoreRsDto;
 
 import java.util.List;
-import java.util.Set;
 
 @Setter
 @Getter
 public class ProductRsDto {
+
     private String name;
     private List<StoreRsDto> stores;
     private String country;

@@ -20,6 +20,7 @@ import javax.sql.DataSource;
         transactionManagerRef = "productTransactionManager"
 )
 public class ProductDatabaseConfig {
+
     private static final String PREFIX_TO_PROPERTIES = "spring.second-datasource";
     public static final String REPOSITORY_PACKAGE = "ru.mephi.gpus_api.repository.products";
     private static final String ENTITY_PACKAGE = Product.class.getPackageName();

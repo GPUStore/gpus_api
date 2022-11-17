@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ParameterRsDto {
+
     private String name;
     private String value;
 }

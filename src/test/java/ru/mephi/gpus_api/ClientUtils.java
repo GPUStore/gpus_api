@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.mephi.gpus_api.ProductLinkUtils.assertProductLinks;
 
 public class ClientUtils {
+
     public static ClientDTO createClientDto() {
         return new ClientDTO()
                 .setEmail("test@mail.ru")

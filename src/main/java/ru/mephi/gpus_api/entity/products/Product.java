@@ -1,7 +1,6 @@
 package ru.mephi.gpus_api.entity.products;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,9 +9,9 @@ import java.util.Set;
 
 @Entity
 @Getter
-@Setter
 @Table(name = "product")
 public class Product {
+
     @Id
     @GeneratedValue(generator = "system_uuid")
     @GenericGenerator(name = "system_uuid", strategy = "uuid")
@@ -55,11 +54,6 @@ public class Product {
 
     public Product setCategories(Set<Category> categorySet){
         this.categories = categorySet;
-        return this;
-    }
-
-    public Product setId(String id) {
-        this.id = id;
         return this;
     }
 

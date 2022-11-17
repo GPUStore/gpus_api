@@ -1,17 +1,16 @@
 package ru.mephi.gpus_api.entity.products;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-@Setter
 @Getter
 @Entity
 @Table(name = "store")
 public class Store {
+
     @Id
     @GeneratedValue(generator = "system_uuid")
     @GenericGenerator(name = "system_uuid", strategy = "uuid")

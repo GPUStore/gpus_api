@@ -9,6 +9,7 @@ import ru.mephi.gpus_api.service.ClientService;
 
 @SpringBootTest
 public class AbstractAppTest {
+
     @Autowired
     protected StoreMapper storeMapper;
     @Autowired

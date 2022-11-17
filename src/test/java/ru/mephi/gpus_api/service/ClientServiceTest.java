@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static ru.mephi.gpus_api.ProductLinkUtils.isContains;
 
 class ClientServiceTest extends AbstractAppTest {
+
     @Test
     void createOrUpdateClientTestWithCorrectClientDtoTest() {
         ClientDTO expected = ClientUtils.createClientDto();

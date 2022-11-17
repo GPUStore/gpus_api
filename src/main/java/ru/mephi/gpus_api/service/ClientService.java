@@ -16,6 +16,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ClientService {
+
     private final ClientRepository clientRepository;
 
     @Transactional

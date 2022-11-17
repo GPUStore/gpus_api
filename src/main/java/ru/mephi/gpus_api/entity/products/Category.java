@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @Table(name = "category")
 public class Category {
+
     @Id
     @Column(name = "category_id")
     @GeneratedValue(generator="system_uuid")
@@ -20,7 +21,6 @@ public class Category {
     private String category_id;
     @Column(name = "name")
     private String name;
-
     @ManyToMany(cascade =
             {
                     CascadeType.MERGE,

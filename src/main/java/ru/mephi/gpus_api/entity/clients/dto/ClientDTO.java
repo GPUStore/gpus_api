@@ -1,9 +1,10 @@
 package ru.mephi.gpus_api.entity.clients.dto;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class ClientDTO {
+
     String email;
     String productId;
 
