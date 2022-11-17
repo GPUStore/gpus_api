@@ -9,13 +9,10 @@ import ru.mephi.gpus_api.service.ClientService;
 
 @SpringBootTest
 public class AbstractAppTest {
-
     @Autowired
     protected StoreMapper storeMapper;
-
     @Autowired
     protected ClientService clientService;
-
     @Autowired
     protected ClientRepository clientRepository;
 
@@ -23,5 +20,4 @@ public class AbstractAppTest {
     void clearAll() {
         clientRepository.deleteAll();
     }
-
 }

@@ -4,7 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class StoreRsDto {
-
     private String name;
     private String url;
     private Double cost;

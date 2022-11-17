@@ -10,7 +10,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "product_link")
 public class ProductLink {
-
     @Id
     @GeneratedValue(generator = "system_uuid")
     @GenericGenerator(name = "system_uuid", strategy = "uuid")

@@ -13,7 +13,6 @@ import javax.xml.bind.ValidationException;
 @Slf4j
 @RestControllerAdvice
 class CustomControllerAdvice {
-
     @ExceptionHandler({GpuStoreException.class})
     public ResponseEntity<String> handleGpuStoreExceptions(GpuStoreException e) {
         log.error("Throws exception: ", e);

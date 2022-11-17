@@ -7,7 +7,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ProductLinkUtils {
-
     public static void assertProductLinks(ProductLink expected, ProductLink actual) {
         assertEquals(expected.getProductId(), actual.getProductId());
     }
@@ -20,5 +19,4 @@ public class ProductLinkUtils {
         }
         return false;
     }
-
 }

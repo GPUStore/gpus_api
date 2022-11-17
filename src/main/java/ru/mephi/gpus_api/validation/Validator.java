@@ -4,7 +4,6 @@ import ru.mephi.gpus_api.entity.clients.dto.ClientDTO;
 import ru.mephi.gpus_api.exception.MissingPropertyException;
 
 public class Validator {
-
     public static void validate(ClientDTO dto) {
         if (dto.getProductId() == null || dto.getProductId().equals("")) {
             throw new MissingPropertyException("product id");
@@ -13,5 +12,4 @@ public class Validator {
             throw new MissingPropertyException("email");
         }
     }
-
 }

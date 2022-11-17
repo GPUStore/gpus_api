@@ -10,7 +10,6 @@ import ru.mephi.gpus_api.entity.products.dto.product.ProductRsDto;
 @Mapper(componentModel = "spring")
 @RequiredArgsConstructor
 public abstract class ProductMapper {
-
     StoreMapper storeMapper;
     ParameterMapper parameterMapper;
     CategoryMapper categoryMapper;

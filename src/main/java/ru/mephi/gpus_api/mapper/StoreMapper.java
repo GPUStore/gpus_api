@@ -7,9 +7,6 @@ import ru.mephi.gpus_api.entity.products.dto.store.StoreRsDto;
 
 @Mapper(componentModel = "spring")
 public interface StoreMapper {
-
     StoreRsDto entityToDto(Store entity);
-
     Store dtoToEntity(StoreRqDto dto);
-
 }

@@ -6,7 +6,5 @@ import ru.mephi.gpus_api.entity.products.dto.parameter.ParameterRsDto;
 
 @Mapper(componentModel = "spring")
 public interface ParameterMapper {
-
     ParameterRsDto entityToDto(Parameter entity);
-
 }

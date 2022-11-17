@@ -13,13 +13,11 @@ import java.util.List;
 @Getter
 @Table(name = "category")
 public class Category {
-
     @Id
     @Column(name = "category_id")
     @GeneratedValue(generator="system_uuid")
     @GenericGenerator(name="system_uuid", strategy = "uuid")
     private String category_id;
-
     @Column(name = "name")
     private String name;
 
