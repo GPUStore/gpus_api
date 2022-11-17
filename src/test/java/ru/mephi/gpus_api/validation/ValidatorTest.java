@@ -17,14 +17,6 @@ class ValidatorTest {
     }
 
     @Test
-    void validateCorrectDtoWithNickTest() {
-        ClientDTO dto = ClientUtils.createClientDto()
-                .setEmail(null);
-
-        assertDoesNotThrow(() -> Validator.validate(dto));
-    }
-
-    @Test
     void validateWithEmptyEmailAndNickTest() {
         ClientDTO dto = ClientUtils.createClientDto()
                 .setEmail("");
