@@ -1,6 +1,7 @@
 package ru.mephi.gpus_api.entity.products;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Setter
 @Getter
 @Table(name = "category")
 public class Category {

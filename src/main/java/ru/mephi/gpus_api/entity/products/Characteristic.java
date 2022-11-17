@@ -11,11 +11,9 @@ import java.util.List;
 @Entity
 @Table(name = "characteristic")
 public class Characteristic {
-
     @Id
     @Column(name = "characteristic_id")
     private String name;
-
     @OneToMany(mappedBy = "characteristic", fetch = FetchType.LAZY)
     private List<Parameter> parameters;
 

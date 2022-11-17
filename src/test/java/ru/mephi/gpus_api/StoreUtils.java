@@ -1,7 +1,7 @@
 package ru.mephi.gpus_api;
 
 import ru.mephi.gpus_api.entity.products.Store;
-import ru.mephi.gpus_api.entity.products.dto.StoreRqDto;
+import ru.mephi.gpus_api.entity.products.dto.store.StoreRqDto;
 
 public class StoreUtils {
 

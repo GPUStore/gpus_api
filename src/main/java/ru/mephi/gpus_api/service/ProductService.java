@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mephi.gpus_api.entity.products.Product;
 import ru.mephi.gpus_api.entity.products.Store;
-import ru.mephi.gpus_api.entity.products.dto.StoreRqDto;
-import ru.mephi.gpus_api.entity.products.dto.StoreRsDto;
+import ru.mephi.gpus_api.entity.products.dto.product.ProductRsDto;
+import ru.mephi.gpus_api.entity.products.dto.store.StoreRqDto;
+import ru.mephi.gpus_api.entity.products.dto.store.StoreRsDto;
 import ru.mephi.gpus_api.exception.ProductWithIdNotFoundException;
 import ru.mephi.gpus_api.exception.StoreExistsException;
+import ru.mephi.gpus_api.mapper.ProductMapper;
 import ru.mephi.gpus_api.mapper.StoreMapper;
 import ru.mephi.gpus_api.repository.products.ProductsRepository;
 
@@ -20,13 +22,17 @@ import java.util.stream.Collectors;
 public class ProductService {
     private final ProductsRepository productsRepository;
     private final StoreMapper storeMapper;
+    private final ProductMapper productMapper;
 
-    public List<Product> getAll() {
-        return productsRepository.findAll();
+    public List<ProductRsDto> getAll() {
+        return productsRepository.findAll().stream()
+                .map(productMapper::entityToDto)
+                .toList();
     }
 
-    public Product getById(String id) {
-        return productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
+    public ProductRsDto getById(String id) {
+        Product product = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
+        return productMapper.entityToDto(product);
     }
 
     public List<StoreRsDto> getStoresById(String id) {

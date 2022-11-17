@@ -1,13 +1,13 @@
 package ru.mephi.gpus_api.entity.products;
 
-import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-@Data
+@Setter
 @Getter
 @Entity
 @Table(name = "store")

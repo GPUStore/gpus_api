@@ -1,14 +1,12 @@
 package ru.mephi.gpus_api.entity.products;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Data
-@EqualsAndHashCode
+@Getter
 @Setter
 @Entity
 @Table(name = "parameter")

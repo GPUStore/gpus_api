@@ -1,4 +1,4 @@
-package ru.mephi.gpus_api.entity.products.dto;
+package ru.mephi.gpus_api.entity.products.dto.store;
 
 import lombok.Getter;
 

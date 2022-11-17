@@ -1,16 +1,16 @@
 package ru.mephi.gpus_api.entity.products;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
-@Data
-@EqualsAndHashCode
 @Entity
+@Getter
+@Setter
 @Table(name = "product")
 public class Product {
     @Id
