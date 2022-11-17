@@ -9,5 +9,4 @@ class GpusApiApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }

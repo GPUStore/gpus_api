@@ -1,0 +1,26 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: api
+  jpa:
+    database:
+    show-sql: true
+  datasource:
+    jdbcUrl: jdbc:postgresql://localhost:5432/client_db
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+  second-datasource:
+    jdbcUrl: jdbc:postgresql://localhost:5432/gpus_db
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
