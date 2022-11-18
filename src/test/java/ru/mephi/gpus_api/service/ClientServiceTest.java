@@ -60,19 +60,10 @@ class ClientServiceTest extends AbstractAppTest {
         String clientId = clientService.createOrUpdateClient(clientDto);
         clientDto.setProductId(null);
 
-        boolean isUnsubscribe = clientService.unsubscribe(clientDto);
+        boolean isUnsubscribe = clientService.unsubscribe(clientId, clientDto.getProductId());
 
         assertTrue(isUnsubscribe);
         assertEquals(Optional.empty(), clientRepository.findById(clientId));
-    }
-
-    @Test
-    void unsubscribeWithIncorrectClientTest() {
-        ClientDTO clientDto = ClientUtils.createClientDto();
-        clientService.createOrUpdateClient(clientDto);
-        clientDto.setEmail("otherEmail");
-
-        assertThrows(ClientWithEmailNotFoundException.class, () -> clientService.unsubscribe(clientDto));
     }
 
     @Test
@@ -80,7 +71,7 @@ class ClientServiceTest extends AbstractAppTest {
         ClientDTO clientDto = ClientUtils.createClientDto();
         String clientId = clientService.createOrUpdateClient(clientDto);
 
-        boolean isUnsubscribe = clientService.unsubscribe(clientDto);
+        boolean isUnsubscribe = clientService.unsubscribe(clientId, clientDto.getProductId());
         Client client = clientRepository.findById(clientId).get();
 
         assertTrue(isUnsubscribe);
@@ -90,10 +81,10 @@ class ClientServiceTest extends AbstractAppTest {
     @Test
     void unsubscribeWithNotExistsProductIdTest() {
         ClientDTO clientDto = ClientUtils.createClientDto();
-        clientService.createOrUpdateClient(clientDto);
+        String clientId = clientService.createOrUpdateClient(clientDto);
         clientDto.setProductId("NotExistsProductId");
 
-        boolean isUnsubscribe = clientService.unsubscribe(clientDto);
+        boolean isUnsubscribe = clientService.unsubscribe(clientId, clientDto.getProductId());
 
         assertFalse(isUnsubscribe);
     }
