@@ -20,12 +20,10 @@ public class ClientService {
     private final ClientRepository clientRepository;
 
     @Transactional
-    public boolean unsubscribe(ClientDTO dto) {
-        String email = dto.getEmail();
-        String productId = dto.getProductId();
-        Client client = clientRepository.findClientByEmail(email)
-                .orElseThrow(() -> new ClientWithEmailNotFoundException(email));
-        if (productId == null) {
+    public boolean unsubscribe(String clientId, String productId) {
+        Client client = clientRepository.findById(clientId)
+                .orElseThrow(() -> new ClientWithEmailNotFoundException(clientId));
+        if (productId == null || productId.equals("")) {
             return unsubscribeAll(client);
         } else {
             return unsubscribe(client, productId);

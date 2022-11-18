@@ -12,9 +12,9 @@ public class ClientController {
 
     private final ClientService clientService;
 
-    @PostMapping("/unsubscribe")
-    public Boolean unsubscribe(@RequestBody ClientDTO unsub) {
-        return clientService.unsubscribe(unsub);
+    @GetMapping("/unsubscribe/clientId={clientId}&productId={productId}")
+    public Boolean unsubscribe(@PathVariable String clientId, @PathVariable String productId) {
+        return clientService.unsubscribe(clientId, productId);
     }
 
     @PostMapping("/subscribe")
