@@ -1,15 +1,57 @@
 package ru.mephi.gpus_api.entity.products;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
-@Data
 @EqualsAndHashCode
+@Getter
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
+@NamedEntityGraph(
+        name = "entity-graph-stores-categories",
+        attributeNodes = {
+                @NamedAttributeNode("stores"),
+        }
+)
+
+@NamedEntityGraph(
+        name = "entity-graph-categories-products",
+        attributeNodes = {
+                @NamedAttributeNode(value = "categories", subgraph = "categories-products"),
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "categories-products",
+                        attributeNodes = {
+                                @NamedAttributeNode("products")
+                        }
+                )
+        }
+)
+
+@NamedEntityGraph(
+        name = "parameters-with-characteristics",
+        attributeNodes = {
+                @NamedAttributeNode(value = "parameters", subgraph = "characteristics-subgraph"),
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "characteristics-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode("characteristic")
+                        }
+                )
+        }
+)
+
 @Entity
 @Table(name = "product")
 public class Product {
@@ -53,7 +95,7 @@ public class Product {
         return this;
     }
 
-    public Product setCategories(Set<Category> categorySet){
+    public Product setCategories(Set<Category> categorySet) {
         this.categories = categorySet;
         return this;
     }

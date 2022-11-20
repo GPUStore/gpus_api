@@ -6,7 +6,6 @@ import ru.mephi.gpus_api.entity.clients.Client;
 import java.util.Optional;
 
 public interface ClientRepository extends JpaRepository<Client, String> {
-
     Integer deleteClientByEmail(String email);
     Optional<Client> findClientByEmailOrNickname(String email, String nickname);
 }

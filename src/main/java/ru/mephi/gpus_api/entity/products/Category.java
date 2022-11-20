@@ -1,5 +1,7 @@
 package ru.mephi.gpus_api.entity.products;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -9,6 +11,9 @@ import java.util.List;
 
 @Entity
 @Getter
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class,
+  property = "category_id")
 @Table(name = "category")
 public class Category {
 

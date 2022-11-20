@@ -1,7 +1,6 @@
 package ru.mephi.gpus_api.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mephi.gpus_api.entity.products.Product;
@@ -26,10 +25,18 @@ public class ProductService {
         return productsRepository.findAll();
     }
 
+    @Transactional
     public Product getById(String id) {
-        return productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
+        Product p1 = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
+        Product p2 =  productsRepository.readById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
+        Product p3 =  productsRepository.getProductById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
+        p1.setParameters(p2.getParameters())
+                .setCategories(p3.getCategories());
+        return p1;
     }
 
+
+    @Transactional
     public List<StoreRsDto> getStoresById(String id) {
         Product product = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
         return product.getStores().stream()
@@ -54,11 +61,7 @@ public class ProductService {
     @Transactional
     public void deleteStoreFromProduct(String id, String url) {
         Product product = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
-        for (Store store : product.getStores()) {
-            if (store.getUrl().equals(url)) {
-                product.getStores().remove(store);
-            }
-        }
+        product.getStores().removeIf(store -> store.getUrl().equals(url));
         productsRepository.save(product);
     }
 }

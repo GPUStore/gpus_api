@@ -1,16 +1,22 @@
 package ru.mephi.gpus_api.entity.products;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
-@Data
 @EqualsAndHashCode
 @Setter
+@Getter
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Table(name = "parameter")
 public class Parameter {
     @Id
@@ -22,6 +28,7 @@ public class Parameter {
     private String name;
     @Column(name = "value", length = 512)
     private String value;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
