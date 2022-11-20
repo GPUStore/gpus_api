@@ -35,7 +35,6 @@ public class ProductService {
         return p1;
     }
 
-
     @Transactional
     public List<StoreRsDto> getStoresById(String id) {
         Product product = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
