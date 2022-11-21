@@ -16,27 +16,12 @@ import java.util.Set;
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
 @NamedEntityGraph(
-        name = "entity-graph-stores-categories",
+        name = "stores-categories",
         attributeNodes = {
                 @NamedAttributeNode("stores"),
+                @NamedAttributeNode(value = "categories"),
         }
 )
-
-@NamedEntityGraph(
-        name = "entity-graph-categories-products",
-        attributeNodes = {
-                @NamedAttributeNode(value = "categories", subgraph = "categories-products"),
-        },
-        subgraphs = {
-                @NamedSubgraph(
-                        name = "categories-products",
-                        attributeNodes = {
-                                @NamedAttributeNode("products")
-                        }
-                )
-        }
-)
-
 @NamedEntityGraph(
         name = "parameters-with-characteristics",
         attributeNodes = {

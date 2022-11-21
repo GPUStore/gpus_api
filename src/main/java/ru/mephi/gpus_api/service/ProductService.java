@@ -29,9 +29,7 @@ public class ProductService {
     public Product getById(String id) {
         Product p1 = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
         Product p2 =  productsRepository.readById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
-        Product p3 =  productsRepository.getProductById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
-        p1.setParameters(p2.getParameters())
-                .setCategories(p3.getCategories());
+        p1.setParameters(p2.getParameters());
         return p1;
     }
 

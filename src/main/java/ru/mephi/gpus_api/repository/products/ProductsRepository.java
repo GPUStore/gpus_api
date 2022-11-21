@@ -12,6 +12,4 @@ public interface ProductsRepository extends JpaRepository<Product, String> {
 
     @EntityGraph(value = "parameters-with-characteristics", type = EntityGraph.EntityGraphType.LOAD)
     Optional<Product> readById(String id);
-    @EntityGraph(value = "entity-graph-categories-products", type = EntityGraph.EntityGraphType.LOAD)
-    Optional<Product> getProductById(String id);
 }
