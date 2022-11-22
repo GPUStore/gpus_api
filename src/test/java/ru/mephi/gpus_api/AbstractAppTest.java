@@ -3,6 +3,7 @@ package ru.mephi.gpus_api;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import ru.mephi.gpus_api.mapper.StoreMapper;
 import ru.mephi.gpus_api.repository.clients.ClientRepository;
 import ru.mephi.gpus_api.service.ClientService;
@@ -18,6 +19,7 @@ public class AbstractAppTest {
     protected ClientRepository clientRepository;
 
     @AfterEach
+    @Transactional
     void clearAll() {
         clientRepository.deleteAll();
     }

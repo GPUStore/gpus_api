@@ -5,7 +5,6 @@ import ru.mephi.gpus_api.AbstractAppTest;
 import ru.mephi.gpus_api.ClientUtils;
 import ru.mephi.gpus_api.entity.clients.Client;
 import ru.mephi.gpus_api.entity.clients.dto.ClientDTO;
-import ru.mephi.gpus_api.exception.ClientWithEmailNotFoundException;
 import ru.mephi.gpus_api.exception.MissingPropertyException;
 
 import java.util.Optional;
