@@ -7,7 +7,7 @@ import ru.mephi.gpus_api.entity.products.Product;
 import java.util.Optional;
 
 public interface ProductsRepository extends JpaRepository<Product, String> {
-    @EntityGraph(value = "entity-graph-stores-categories", type = EntityGraph.EntityGraphType.LOAD)
+    @EntityGraph(value = "stores-categories", type = EntityGraph.EntityGraphType.LOAD)
     Optional<Product> findById(String id);
 
     @EntityGraph(value = "parameters-with-characteristics", type = EntityGraph.EntityGraphType.LOAD)

@@ -15,11 +15,12 @@ import java.util.Set;
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
+
 @NamedEntityGraph(
         name = "stores-categories",
         attributeNodes = {
-                @NamedAttributeNode("stores"),
-                @NamedAttributeNode(value = "categories"),
+                @NamedAttributeNode(value = "stores"),
+                @NamedAttributeNode(value ="categories"),
         }
 )
 @NamedEntityGraph(
@@ -36,7 +37,6 @@ import java.util.Set;
                 )
         }
 )
-
 @Entity
 @Table(name = "product")
 public class Product {

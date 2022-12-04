@@ -1,7 +1,6 @@
 package ru.mephi.gpus_api.entity.products;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -28,7 +27,6 @@ public class Parameter {
     private String name;
     @Column(name = "value", length = 512)
     private String value;
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;

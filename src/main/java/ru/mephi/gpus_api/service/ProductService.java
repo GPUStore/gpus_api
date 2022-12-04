@@ -27,10 +27,9 @@ public class ProductService {
 
     @Transactional
     public Product getById(String id) {
-        Product p1 = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
-        Product p2 =  productsRepository.readById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
-        p1.setParameters(p2.getParameters());
-        return p1;
+        Product productWithStoresAndCategories = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
+        Product productWithParameters =  productsRepository.readById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
+        return productWithStoresAndCategories.setParameters(productWithParameters.getParameters());
     }
 
     @Transactional
