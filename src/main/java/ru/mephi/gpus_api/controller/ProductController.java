@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.mephi.gpus_api.entity.products.dto.product.ProductRsDto;
 import ru.mephi.gpus_api.entity.products.dto.store.StoreRqDto;
 import ru.mephi.gpus_api.entity.products.dto.store.StoreRsDto;
+import ru.mephi.gpus_api.service.HibernateSearchService;
 import ru.mephi.gpus_api.service.ProductService;
 
 import java.util.List;
@@ -15,10 +16,16 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+    private final HibernateSearchService hibernateSearchService;
 
     @GetMapping
     public List<ProductRsDto> getAll() {
         return productService.getAll();
+    }
+
+    @GetMapping("/search/found")
+    public List<ProductRsDto> search(@RequestParam(value = "productText") String productText) {
+        return  hibernateSearchService.searchProduct(productText);
     }
 
     @GetMapping("/{id}")

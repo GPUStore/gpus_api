@@ -2,6 +2,7 @@ package ru.mephi.gpus_api.entity.products;
 
 import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 
