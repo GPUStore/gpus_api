@@ -3,6 +3,7 @@ package ru.mephi.gpus_api.entity.products;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Setter
 @Getter
 @JsonIdentityInfo(
   generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -22,10 +24,8 @@ public class Category {
     @GeneratedValue(generator="system_uuid")
     @GenericGenerator(name="system_uuid", strategy = "uuid")
     private String category_id;
-
     @Column(name = "name")
     private String name;
-
     @ManyToMany(cascade =
             {
                     CascadeType.MERGE,

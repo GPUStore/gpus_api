@@ -1,12 +1,13 @@
 package ru.mephi.gpus_api.entity.clients;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-@Data
+@Getter
 @Entity
 @Table(name = "product_link")
 public class ProductLink {

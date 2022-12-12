@@ -2,7 +2,6 @@ package ru.mephi.gpus_api.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import ru.mephi.gpus_api.entity.clients.ClientUnsubDto;
 import ru.mephi.gpus_api.entity.clients.dto.ClientDTO;
 import ru.mephi.gpus_api.service.ClientService;
 
@@ -10,11 +9,12 @@ import ru.mephi.gpus_api.service.ClientService;
 @RequestMapping("/clients")
 @RequiredArgsConstructor
 public class ClientController {
+
     private final ClientService clientService;
 
-    @GetMapping("/unsubscribe")
-    public Boolean unsubscribe(@RequestBody ClientUnsubDto unsub) {
-        return clientService.unsubscribe(unsub);
+    @GetMapping("/unsubscribe/clientId={clientId}&productId={productId}")
+    public Boolean unsubscribe(@PathVariable String clientId, @PathVariable String productId) {
+        return clientService.unsubscribe(clientId, productId);
     }
 
     @PostMapping("/subscribe")

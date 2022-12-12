@@ -1,25 +1,25 @@
-package ru.mephi.gpus_api.entity.products.dto;
+package ru.mephi.gpus_api.entity.products.dto.store;
 
 import lombok.Getter;
 
 @Getter
-public class StoreRsDto {
+public class StoreRqDto {
 
     private String name;
     private String url;
     private Double cost;
 
-    public StoreRsDto setName(String name) {
+    public StoreRqDto setName(String name) {
         this.name = name;
         return this;
     }
 
-    public StoreRsDto setUrl(String url) {
+    public StoreRqDto setUrl(String url) {
         this.url = url;
         return this;
     }
 
-    public StoreRsDto setCost(Double cost) {
+    public StoreRqDto setCost(Double cost) {
         this.cost = cost;
         return this;
     }

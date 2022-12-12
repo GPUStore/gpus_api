@@ -1,0 +1,26 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: api
+  jpa:
+    database:
+    show-sql: true
+  datasource:
+    jdbcUrl: jdbc:h2:mem:client_db;DB_CLOSE_DELAY=-1
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+  second-datasource:
+    jdbcUrl: jdbc:h2:mem:gpus_db;DB_CLOSE_DELAY=-1
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

@@ -17,19 +17,11 @@ class ValidatorTest {
     }
 
     @Test
-    void validateCorrectDtoWithEmailTest() {
+    void validateWithEmptyEmailAndNickTest() {
         ClientDTO dto = ClientUtils.createClientDto()
-                .setNickname(null);
+                .setEmail("");
 
-        assertDoesNotThrow(() -> Validator.validate(dto));
-    }
-
-    @Test
-    void validateCorrectDtoWithNickTest() {
-        ClientDTO dto = ClientUtils.createClientDto()
-                .setEmail(null);
-
-        assertDoesNotThrow(() -> Validator.validate(dto));
+        assertThrows(MissingPropertyException.class, () -> Validator.validate(dto));
     }
 
     @Test
@@ -44,42 +36,6 @@ class ValidatorTest {
     void validateWithEmptyProductIdTest() {
         ClientDTO dto = ClientUtils.createClientDto()
                 .setProductId("");
-
-        assertThrows(MissingPropertyException.class, () -> Validator.validate(dto));
-    }
-
-    @Test
-    void validateWithNullEmailAndNickTest() {
-        ClientDTO dto = ClientUtils.createClientDto()
-                .setEmail(null)
-                .setNickname(null);
-
-        assertThrows(MissingPropertyException.class, () -> Validator.validate(dto));
-    }
-
-    @Test
-    void validateWithEmptyEmailAndNickTest() {
-        ClientDTO dto = ClientUtils.createClientDto()
-                .setEmail("")
-                .setNickname("");
-
-        assertThrows(MissingPropertyException.class, () -> Validator.validate(dto));
-    }
-
-    @Test
-    void validateWithNullEmailAndEmptyNickTest() {
-        ClientDTO dto = ClientUtils.createClientDto()
-                .setEmail(null)
-                .setNickname("");
-
-        assertThrows(MissingPropertyException.class, () -> Validator.validate(dto));
-    }
-
-    @Test
-    void validateWithEmptyEmailAndNullNickTest() {
-        ClientDTO dto = ClientUtils.createClientDto()
-                .setEmail("")
-                .setNickname(null);
 
         assertThrows(MissingPropertyException.class, () -> Validator.validate(dto));
     }

@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mephi.gpus_api.entity.clients.Client;
-import ru.mephi.gpus_api.entity.clients.ClientUnsubDto;
 import ru.mephi.gpus_api.entity.clients.ProductLink;
 import ru.mephi.gpus_api.entity.clients.dto.ClientDTO;
 import ru.mephi.gpus_api.exception.ClientWithEmailNotFoundException;
@@ -17,30 +16,30 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class ClientService {
+
     private final ClientRepository clientRepository;
 
-    public boolean unsubscribe(ClientUnsubDto dto) {
-        String email = dto.getEmail();
-        String productId = dto.getProductId();
-        if (productId == null) {
-            return unsubscribeAll(email);
+    @Transactional
+    public boolean unsubscribe(String clientId, String productId) {
+        Client client = clientRepository.findById(clientId)
+                .orElseThrow(() -> new ClientWithEmailNotFoundException(clientId));
+        if (productId == null || productId.equals("")) {
+            return unsubscribeAll(client);
         } else {
-            return unsubscribe(email, productId);
+            return unsubscribe(client, productId);
         }
     }
 
-    @Transactional
-    public Boolean unsubscribeAll(String email) {
-        return clientRepository.deleteClientByEmail(email) == 1;
+    private Boolean unsubscribeAll(Client client) {
+        clientRepository.delete(client);
+        return true;
     }
 
-    @Transactional //TODO удалить связь
-    public boolean unsubscribe(String email, String productId) {
-        Client client = clientRepository.findClientByEmailOrNickname(email, "")
-                .orElseThrow(() -> new ClientWithEmailNotFoundException(email));
+    private boolean unsubscribe(Client client, String productId) {
         for (ProductLink link : client.getProductIds()) {
             if (link.getProductId().equals(productId)) {
                 client.getProductIds().remove(link);
+                clientRepository.save(client);
                 return true;
             }
         }
@@ -52,18 +51,16 @@ public class ClientService {
         Validator.validate(clientDTO);
         String productId = clientDTO.getProductId();
         String email = clientDTO.getEmail();
-        String nickname = clientDTO.getNickname();
-        Client client = clientRepository.findClientByEmailOrNickname(email, nickname)
-                .orElse(createClient(email, nickname, new ArrayList<>()));
+        Client client = clientRepository.findClientByEmail(email)
+                .orElse(createClient(email, new ArrayList<>()));
         ProductLink productLink = createProductLink(productId, client);
         addIfNotContains(client, productLink);
         return clientRepository.save(client).getId();
     }
 
-    private Client createClient(String email, String nickname, List<ProductLink> productLinks) {
+    private Client createClient(String email, List<ProductLink> productLinks) {
         return new Client()
                 .setEmail(email)
-                .setNickname(nickname)
                 .setProductIds(productLinks);
     }
 

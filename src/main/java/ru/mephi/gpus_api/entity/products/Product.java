@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
+
 @EqualsAndHashCode
 @Getter
 @JsonIdentityInfo(
@@ -37,9 +38,12 @@ import java.util.Set;
                 )
         }
 )
+
 @Entity
+@Getter
 @Table(name = "product")
 public class Product {
+
     @Id
     @GeneratedValue(generator = "system_uuid")
     @GenericGenerator(name = "system_uuid", strategy = "uuid")
@@ -82,11 +86,6 @@ public class Product {
 
     public Product setCategories(Set<Category> categorySet) {
         this.categories = categorySet;
-        return this;
-    }
-
-    public Product setId(String id) {
-        this.id = id;
         return this;
     }
 

@@ -3,8 +3,8 @@ package ru.mephi.gpus_api.mapper;
 import org.junit.jupiter.api.Test;
 import ru.mephi.gpus_api.AbstractAppTest;
 import ru.mephi.gpus_api.entity.products.Store;
-import ru.mephi.gpus_api.entity.products.dto.StoreRqDto;
-import ru.mephi.gpus_api.entity.products.dto.StoreRsDto;
+import ru.mephi.gpus_api.entity.products.dto.store.StoreRqDto;
+import ru.mephi.gpus_api.entity.products.dto.store.StoreRsDto;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static ru.mephi.gpus_api.StoreUtils.createCorrectStore;

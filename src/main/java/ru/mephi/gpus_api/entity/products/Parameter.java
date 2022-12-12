@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ import javax.persistence.*;
         property = "id")
 @Table(name = "parameter")
 public class Parameter {
+
     @Id
     @GeneratedValue(generator="system_uuid")
     @GenericGenerator(name="system_uuid", strategy = "uuid")
@@ -33,11 +35,6 @@ public class Parameter {
     @ManyToOne
     @JoinColumn(name = "characteristic_id", nullable = false)
     private Characteristic characteristic;
-
-    public Parameter setId(String id) {
-        this.id = id;
-        return this;
-    }
 
     public Parameter setName(String name) {
         this.name = name;
