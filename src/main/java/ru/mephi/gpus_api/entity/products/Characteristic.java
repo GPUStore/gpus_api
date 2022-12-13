@@ -1,14 +1,22 @@
 package ru.mephi.gpus_api.entity.products;
 
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.search.annotations.Indexed;
+
 
 import javax.persistence.*;
 import java.util.List;
 
+
+@EqualsAndHashCode
+@JsonIdentityInfo(
+  generator = ObjectIdGenerators.PropertyGenerator.class,
+  property = "name")
 @Getter
-@Setter
+
 @Entity
 @Table(name = "characteristic")
 public class Characteristic {

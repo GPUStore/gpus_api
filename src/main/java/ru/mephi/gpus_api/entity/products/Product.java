@@ -1,18 +1,44 @@
 package ru.mephi.gpus_api.entity.products;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.search.annotations.Analyze;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Index;
-import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
 
-@Indexed
+@EqualsAndHashCode
+@Getter
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
+
+@NamedEntityGraph(
+        name = "stores-categories",
+        attributeNodes = {
+                @NamedAttributeNode(value = "stores"),
+                @NamedAttributeNode(value ="categories"),
+        }
+)
+@NamedEntityGraph(
+        name = "parameters-with-characteristics",
+        attributeNodes = {
+                @NamedAttributeNode(value = "parameters", subgraph = "characteristics-subgraph"),
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "characteristics-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode("characteristic")
+                        }
+                )
+        }
+)
+
 @Entity
 @Getter
 @Table(name = "product")
@@ -23,12 +49,10 @@ public class Product {
     @GenericGenerator(name = "system_uuid", strategy = "uuid")
     @Column(name = "product_id", length = 32)
     private String id;
-    @Field
     @Column(name = "name")
     private String name;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Store> stores;
-    @Field
     @Column(name = "country")
     private String country;
     @Column(name = "weight")
@@ -60,7 +84,7 @@ public class Product {
         return this;
     }
 
-    public Product setCategories(Set<Category> categorySet){
+    public Product setCategories(Set<Category> categorySet) {
         this.categories = categorySet;
         return this;
     }

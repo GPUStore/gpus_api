@@ -1,13 +1,23 @@
 package ru.mephi.gpus_api.entity.products;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 
+@EqualsAndHashCode
+@Setter
 @Getter
 @Entity
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Table(name = "parameter")
 public class Parameter {
 
