@@ -1,5 +1,8 @@
 package ru.mephi.gpus_api.entity.products;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -7,6 +10,9 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Getter
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 @Entity
 @Table(name = "store")
 public class Store {

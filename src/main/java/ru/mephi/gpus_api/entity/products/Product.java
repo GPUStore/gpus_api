@@ -1,11 +1,43 @@
 package ru.mephi.gpus_api.entity.products;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
+
+
+@EqualsAndHashCode
+@Getter
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
+
+@NamedEntityGraph(
+        name = "stores-categories",
+        attributeNodes = {
+                @NamedAttributeNode(value = "stores"),
+                @NamedAttributeNode(value ="categories"),
+        }
+)
+@NamedEntityGraph(
+        name = "parameters-with-characteristics",
+        attributeNodes = {
+                @NamedAttributeNode(value = "parameters", subgraph = "characteristics-subgraph"),
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "characteristics-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode("characteristic")
+                        }
+                )
+        }
+)
 
 @Entity
 @Getter
@@ -52,7 +84,7 @@ public class Product {
         return this;
     }
 
-    public Product setCategories(Set<Category> categorySet){
+    public Product setCategories(Set<Category> categorySet) {
         this.categories = categorySet;
         return this;
     }
