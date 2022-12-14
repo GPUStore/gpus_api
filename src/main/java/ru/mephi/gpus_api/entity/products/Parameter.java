@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 

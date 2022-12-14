@@ -5,15 +5,24 @@ spring:
   application:
     name: api
   jpa:
-    database:
+    database: POSTGRESQL
     show-sql: true
+    properties:
+      hibernate:
+        ddl-auto: update
+        autoregister_listeners: true
+        serach:
+          default:
+            directory_provider: filesystem
+            indexBase: lat
+
   datasource:
-    jdbcUrl: jdbc:postgresql://localhost:5432/client_db
+    jdbcUrl: jdbc:postgresql://localhost:5433/client_db
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver
   second-datasource:
-    jdbcUrl: jdbc:postgresql://localhost:5432/gpus_db
+    jdbcUrl: jdbc:postgresql://localhost:5433/gpus_db
     username: postgres
     password: postgres
     driverClassName: org.postgresql.Driver

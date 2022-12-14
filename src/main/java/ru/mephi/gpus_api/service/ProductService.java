@@ -33,12 +33,20 @@ public class ProductService {
                 .toList();
     }
 
-
     @Transactional
-    public Product getById(String id) {
-        Product productWithStoresAndCategories = productsRepository.findById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
-        Product productWithParameters =  productsRepository.readById(id).orElseThrow(() -> new ProductWithIdNotFoundException(id));
-        return productWithStoresAndCategories.setParameters(productWithParameters.getParameters());
+    public ProductRsDto getById(String id) {
+        Product productWithStoresAndCategories =
+                productsRepository
+                        .findById(id)
+                        .orElseThrow(() -> new ProductWithIdNotFoundException(id));
+        Product productWithParameters =
+                productsRepository
+                        .readById(id)
+                        .orElseThrow(() -> new ProductWithIdNotFoundException(id));
+        return productMapper
+                .entityToDto(
+                        productWithStoresAndCategories
+                                .setParameters(productWithParameters.getParameters()));
     }
 
     @Transactional

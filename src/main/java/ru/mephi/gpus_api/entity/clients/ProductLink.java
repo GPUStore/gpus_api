@@ -3,9 +3,12 @@ package ru.mephi.gpus_api.entity.clients;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import java.util.Objects;
+
+
 
 @Getter
 @Entity
