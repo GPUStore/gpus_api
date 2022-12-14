@@ -7,27 +7,27 @@ import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import ru.mephi.gpus_api.entity.products.Product;
+import ru.mephi.gpus_api.entity.products.Type;
 import ru.mephi.gpus_api.entity.products.dto.product.ProductRsDto;
 import ru.mephi.gpus_api.mapper.ProductMapper;
-import ru.mephi.gpus_api.repository.products.ProductsRepository;
+import ru.mephi.gpus_api.repository.products.ProductPagAndSortRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
 import java.util.List;
-
 
 
 @Slf4j
 @AllArgsConstructor
 public class HibernateSearchService {
+
     private final EntityManager entityManager;
     private final ProductMapper productMapper;
-
+    private final ProductPagAndSortRepository productPagAndSortRepository;
 
     /**
      * Create an initial Lucene index for the data already present in the
@@ -44,42 +44,65 @@ public class HibernateSearchService {
         }
     }
 
+    public List<ProductRsDto> getAllProductPage(Pageable pageable) {
+        Page<Product> productPage = productPagAndSortRepository.findAll(pageable);
+        return productPage
+                .getContent()
+                .stream()
+                .map(productMapper::entityToDtoWithParameters)
+                .toList();
+
+    }
+
+    public List<ProductRsDto> getProductPageByType(Type type, Pageable pageable) {
+        Page<Product> productPage = productPagAndSortRepository.findProductByType(type, pageable);
+
+        return productPage
+                .getContent()
+                .stream()
+                .map(productMapper::entityToDtoWithParameters)
+                .toList();
+    }
+
     @Transactional
-    public List<ProductRsDto> searchProduct(String productText){
+    @SuppressWarnings("unchecked")
+    public List<ProductRsDto> searchProduct(String productText) {
+        if (productText.length() < 3)
+            return null;
+
         FullTextEntityManager fullTextEntityManager = Search.getFullTextEntityManager(entityManager);
 
         QueryBuilder queryBuilder =
                 fullTextEntityManager.getSearchFactory()
                         .buildQueryBuilder().forEntity(Product.class).get();
 
-
-        // a very basic query by keywords
         Query luceneQuery =
                 queryBuilder
                         .keyword()
                         .fuzzy()
-                        .withEditDistanceUpTo(1)
-                        .withPrefixLength(1)
                         .onFields("name", "country")
                         .matching(productText)
                         .createQuery();
 
-        // wrap Lucene query in an Hibernate Query object
         FullTextQuery jpaQuery =
                 fullTextEntityManager.createFullTextQuery(luceneQuery, Product.class);
 
-        // execute search and return results (sorted by relevance as default)
-
-        List<Product> result = null;
         try {
-
-           // List enities = jpaQuery.getResultList();
-            result = (List<Product> ) jpaQuery.getResultList();
+            List<Product> result = (List<Product>) jpaQuery.getResultList();
             return result.stream().map(productMapper::entityToDto).toList();
-        } catch (NoResultException nre) {
-            ;// do nothing
-
+        } catch (NoResultException ignored) {
         }
         return null;
     }
+
+    @Transactional
+    public List<String> searchProductNames(String productNameText) {
+        List<ProductRsDto> products = searchProduct(productNameText);
+        if (products != null) {
+            return products.stream().map(ProductRsDto::getName).toList();
+        }
+        return null;
+    }
+
+
 }
