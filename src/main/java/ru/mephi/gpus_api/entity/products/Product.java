@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.*;
 import java.util.List;
@@ -38,9 +40,8 @@ import java.util.Set;
                 )
         }
 )
-
 @Entity
-@Getter
+@Indexed
 @Table(name = "product")
 public class Product {
 
@@ -50,10 +51,12 @@ public class Product {
     @Column(name = "product_id", length = 32)
     private String id;
     @Column(name = "name")
+    @Field
     private String name;
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Store> stores;
     @Column(name = "country")
+    @Field
     private String country;
     @Column(name = "weight")
     private double weight;

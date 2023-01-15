@@ -7,15 +7,19 @@ spring:
   jpa:
     database:
     show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
   datasource:
     jdbcUrl: jdbc:h2:mem:client_db;DB_CLOSE_DELAY=-1
     username: sa
-    password: sa
+    password:
     driverClassName: org.h2.Driver
   second-datasource:
     jdbcUrl: jdbc:h2:mem:gpus_db;DB_CLOSE_DELAY=-1
     username: sa
-    password: sa
+    password:
     driverClassName: org.h2.Driver
 
 eureka:
